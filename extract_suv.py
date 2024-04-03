@@ -1,9 +1,16 @@
 import re
+import argparse
 
 fic = "20200527152905.861802.ig.tum"
 
 
-def do_it():
+def parse():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("f")
+    return parser.parse_args()
+
+
+def do_it(fic):
     with open(fic, "r") as f:
         lines = f.read()
 
@@ -14,4 +21,5 @@ def do_it():
 
 
 if __name__ == "__main__":
-    do_it()
+    p = parse()
+    do_it(p.f)
