@@ -1,6 +1,6 @@
 import re
 
-fic = "data/20200527152905.861802.ig.tum"
+fic = "20200527152905.861802.ig.tum"
 
 with open(fic, "r") as f:
     lines = f.read()
