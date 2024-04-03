@@ -10,13 +10,8 @@ def parse():
     return parser.parse_args()
 
 
-def extract_SUV(chaine):
-    m = re.findall("(M.*)(?<!RC)SUVValue = (\d+\.\d+)", chaine, re.M)
-    return m
-
-
-def extract_HU(chaine):
-    m = re.findall("(M.*)HUValue = (\d+(\.\d+)?)", chaine, re.M)
+def extract_infos(chaine, type_info):
+    m = re.findall(f"(M.*)(?<!RC){type_info}Value = (\d+(\.\d+)?)", chaine, re.M)
     return m
 
 
@@ -32,8 +27,8 @@ def sortie_resultat(data):
 
 def do_it(fic):
     lines = ouverture_fichier(fic)
-    suv = extract_SUV(lines)
-    hu = extract_HU(lines)
+    suv = extract_infos(lines, "SUV")
+    hu = extract_infos(lines, "HU")
     d = sortie_resultat(suv)
     e = sortie_resultat(hu)
     print(d, e)
