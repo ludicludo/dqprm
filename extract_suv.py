@@ -14,7 +14,11 @@ def parse():
 
 
 def extract_infos(chaine, type_info):
-    m = re.findall(f"(M.*)(?<!RC){type_info}Value = (\d+(\.\d+)?)", chaine, re.M)
+    type_info = type_info.upper()
+    if type_info == "SUV" or type_info == "HU":
+        m = re.findall(f"(M.*)(?<!RC){type_info}Value = (\d+(\.\d+)?)", chaine, re.M)
+    else:
+        m = None
     return m
 
 
