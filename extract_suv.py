@@ -1,6 +1,7 @@
 import re
 import argparse
-import csv
+
+from inout import ouverture_fichier, csv_file
 
 fic = "20200527152905.861802.ig.tum"
 
@@ -17,21 +18,8 @@ def extract_infos(chaine, type_info):
     return m
 
 
-def ouverture_fichier(fic):
-    with open(fic, "r") as f:
-        lines = f.read()
-    return lines
-
-
 def sortie_resultat(data):
     return [(el[0], float(el[1])) for el in data]
-
-
-def csv_file(rows, fichier_out):
-    with open(fichier_out, "w") as csv_out:
-        csv_w = csv.writer(csv_out)
-        for row in rows:
-            csv_w.writerow(row)
 
 
 def do_it(fic, output):
