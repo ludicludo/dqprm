@@ -1,5 +1,6 @@
 import re
 import argparse
+import csv
 
 fic = "20200527152905.861802.ig.tum"
 
@@ -22,7 +23,14 @@ def ouverture_fichier(fic):
 
 
 def sortie_resultat(data):
-    return {el[0]: float(el[1]) for el in data}
+    return [(el[0], float(el[1])) for el in data]
+
+
+def csv_file(rows, fichier_out):
+    with open(fichier_out, "w") as csv_out:
+        csv_w = csv.writer(csv_out)
+        for row in rows:
+            csv_w.writerow(row)
 
 
 def do_it(fic):
@@ -30,7 +38,9 @@ def do_it(fic):
     suv = extract_infos(lines, "SUV")
     hu = extract_infos(lines, "HU")
     d = sortie_resultat(suv)
+    csv_file(d, "suv.csv")
     e = sortie_resultat(hu)
+    csv_file(e, "hu.csv")
     print(d, e)
 
 
