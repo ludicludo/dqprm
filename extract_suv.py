@@ -10,12 +10,15 @@ def parse():
     return parser.parse_args()
 
 
+def extract_SUV(chaine):
+    m = re.findall("(M.*)(?<!RC)SUVValue = (\d+\.\d+)", chaine, re.M)
+    return m
+
+
 def do_it(fic):
     with open(fic, "r") as f:
         lines = f.read()
-
-    m = re.findall("(M.*)(?<!RC)SUVValue = (\d+\.\d+)", lines, re.M)
-
+    m = extract_SUV(lines)
     d = {el[0]: float(el[1]) for el in m}
     print(d)
 
