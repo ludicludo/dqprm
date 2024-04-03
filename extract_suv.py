@@ -8,6 +8,7 @@ fic = "20200527152905.861802.ig.tum"
 def parse():
     parser = argparse.ArgumentParser()
     parser.add_argument("f")
+    parser.add_argument("-o")
     return parser.parse_args()
 
 
@@ -33,17 +34,17 @@ def csv_file(rows, fichier_out):
             csv_w.writerow(row)
 
 
-def do_it(fic):
+def do_it(fic, output):
     lines = ouverture_fichier(fic)
     suv = extract_infos(lines, "SUV")
     hu = extract_infos(lines, "HU")
     d = sortie_resultat(suv)
-    csv_file(d, "suv.csv")
+    csv_file(d, output + "_suv.csv")
     e = sortie_resultat(hu)
-    csv_file(e, "hu.csv")
+    csv_file(e, output + "_hu.csv")
     print(d, e)
 
 
 if __name__ == "__main__":
     p = parse()
-    do_it(p.f)
+    do_it(p.f, p.o)
