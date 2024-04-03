@@ -15,12 +15,28 @@ def extract_SUV(chaine):
     return m
 
 
-def do_it(fic):
+def extract_HU(chaine):
+    m = re.findall("(M.*)HUValue = (\d+(\.\d+)?)", chaine, re.M)
+    return m
+
+
+def ouverture_fichier(fic):
     with open(fic, "r") as f:
         lines = f.read()
-    m = extract_SUV(lines)
-    d = {el[0]: float(el[1]) for el in m}
-    print(d)
+    return lines
+
+
+def sortie_resultat(data):
+    return {el[0]: float(el[1]) for el in data}
+
+
+def do_it(fic):
+    lines = ouverture_fichier(fic)
+    suv = extract_SUV(lines)
+    hu = extract_HU(lines)
+    d = sortie_resultat(suv)
+    e = sortie_resultat(hu)
+    print(d, e)
 
 
 if __name__ == "__main__":
